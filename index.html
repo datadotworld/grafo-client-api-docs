@@ -365,7 +365,7 @@
                     <a href="#update-concept-attribute" class="toc-h2 toc-link" data-title="Update Concept Attribute">Update Concept Attribute</a>
                   </li>
                   <li>
-                    <a href="#delete-concept-attribute-under-construction" class="toc-h2 toc-link" data-title="Delete Concept Attribute (Under Construction)">Delete Concept Attribute (Under Construction)</a>
+                    <a href="#delete-concept-attribute" class="toc-h2 toc-link" data-title="Delete Concept Attribute">Delete Concept Attribute</a>
                   </li>
               </ul>
           </li>
@@ -1131,40 +1131,30 @@ If no more folders are available, the resulting array will be empty. This reques
 <h2 id='get-all'>Get All</h2><h1 id='my-shared-documents'>My Shared Documents</h1>
 <p>This entity X is blahhh</p>
 <h2 id='blah'>Blah</h2><h1 id='ekg-document-basics'>EKG Document - Basics</h1>
-<p>An EKG Document contains concepts, relationships, specialisation. </p>
+<p>The real world entities and their inter-relations, that are organised in a graph make up the EKG Document. The graph structures use nodes, edges and properties to represent and store data. This, in Grafo is represented as Concepts, Relationships and Attributes.</p>
 
-<p><b>Concept </b>is the equivalent of vertex in graph parlance. They represented as circles in the EKG Document UI Editor. In EKG they represent a business entity, business concept or a noun. </p>
+<p><b>Concept </b>is the equivalent of vertex in graph parlance. They represented as circles in the EKG Document UI Editor. In EKG they represent a business entity, business concept or a noun. <br>Each concept is identified by an id beginning with <code>node-</code></p>
 
-<p>Each concept is identified by an id beginning with <code>node-</code></p>
+<p><b>Relationship </b>, as the name suggests gives the inter-relationship between two Concepts. In UI Editor, this is a directed line that connects two nodes. <br>Each relationship is identified by an id beginning with <code>link-</code></p>
 
-<p><b>Relationship </b>, as the name suggests gives the relationship between two Concepts.</p>
+<p><b>Specialisation </b>is a type of relationship, which depicts mainly a parent-child relationship. In UI Editor, this is represented using dashed line that is directed. The start node from where the line begins is the child and, the end node is the parent.</p>
 
-<p>Each relationship is identified by an id beginning with <code>link-</code></p>
-
-<p><b>Specialisation </b>is a type of relationship, which depicts mainly a parent-child relationship.</p>
-
-<p><b>Attribute</b><br>
-Concepts and Relationships have attributes.
-Each Concept Attribute is identified by an id beginning with <code>attr-</code>. Each Relationship Attribute is identified by an id beginning with <code>linkattr-</code></p>
-
-<p><b>Field </b>is a name-value pair entity in a concept, relationship or, their attributes.</p>
-
-<p>Coarse grained approach includes the endpoints to create, update or delete the elements of an ekg document in one go.</p>
+<p><b>Attribute </b>is a property that provides additional information or metadata for Concept and Relationship. In UI Editor, the number of attributes in a concept or relationship are displayed at the bottom of respective figures. <br>Concept Attribute is identified by an id beginning with <code>attr-</code>. <br>Relationship Attribute is identified by an id beginning with <code>linkattr-</code></p>
 
 <!-- <img src="images/grafo_image1.png" alt="Example Image"/> -->
 
 <p><img src="images/grafo_image1.png" title="Example Image" alt="alt text" />
-<b>Figure 1</b>: A simple example of EKG Document containing three concepts, one relationship, one self relationship and one specialisation.</p>
+<b>Figure 1</b>: A simple example of EKG Document containing three concepts, one relationship, one self relationship and one specialisation. The numbers at the bottom of concepts and relationships represent the number of attributes.</p>
 <h1 id='fine-grained-api'>Fine Grained API</h1>
 <p>Fine grained API allows one to deal with the constituents of a EkgDocument individually at the network level. This is convenient when individual components are dealt using plain vanilla REST. Javascript API inherently provides the finegrained approach that is also scalable. We recommend using the coarse grained API when dealing via Java etc. as multiple modifications can be aggregated and dispatched to the server at one stretch and the cost of such operation is linear along with a fixed offset base cost. REST API or fine grained API in Java has the fixed offset cost overhead for each fine grained call making it less efficient. </p>
 <h1 id='coarse-grained-api'>Coarse Grained API</h1>
-<p>A little intro to coarse grained api here</p>
+<p>Coarse grained approach provides the functionality of aggregating all the operations required to be carried out in an EKG Document. Using this approach, one can create, update or delete the elements of an EKG document in one go. This makes a single call to the server and the cost of such operation is linear in comparison to fine grained approach.</p>
+
+<p>Coarse grained approach is recommended when multiple operations are expected to be carried out on an EKG document. Fine grained approach can be used for minor additions, updations or deletions.</p>
 <h1 id='ekg-document-coarse-grained-operations'>EKG Document - Coarse Grained Operations</h1>
 <p>Following operations are supported</p>
 <h2 id='get-ekg-document'>Get EKG Document</h2>
 <p>This endpoint retrieves all the contents of an ekg document. The information includes document details, list of concepts and relationships along with their attributes and fields.</p>
-
-<p>The contents of EKG Document to demonstrate this endpoint is as shown in the Figure 1 above.</p>
 <pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span><span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();){</span> 
     <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"c7712dfe-b287-498d-a80d-1b09a9edc49a"</span><span class="o">);</span>
     <span class="n">EkgDocument</span> <span class="n">ekgDoc</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getEkgDocument</span><span class="o">(</span><span class="n">docId</span><span class="o">);</span>
@@ -1571,14 +1561,10 @@ Each Concept Attribute is identified by an id beginning with <code>attr-</code>.
       <span class="n">EkgDocument</span> <span class="n">ekgDocAdded</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">addEkgDocument</span><span class="o">(</span><span class="n">ekgDoc</span><span class="o">);</span>
       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ekgDocAdded</span><span class="o">);</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
-    -d <span class="s1">'{"title": "Test Document", 
-    "concepts": {
-      "node-82e0ae9f-9d00-4eee-854c-ccd8f0e0aa37" : {
-        "id": "node-82e0ae9f-9d00-4eee-854c-ccd8f0e0aa37",
-        "type": "concept",
-        "label": "A",
-      }}'</span> 
+    -d &lt;data&gt; 
     https://gra.fo/api/v1/documents/ekg
+<span class="c">#The output displayed below can be sent as data to the above command</span>
+<span class="c">#Read </span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
@@ -1589,11 +1575,82 @@ Each Concept Attribute is identified by an id beginning with <code>attr-</code>.
 (Java and Javascript map JSON to their respective data structures)</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-7bec685e-6330-4add-ab32-a31edab215f3"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"concept"</span><span class="w">
-  </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concept3"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Description"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#node-7bec685e-6330-4add-ab32-a31edab215f3_Concept3"</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"446f86c7-2f0f-4fe7-9bea-c778e469b914"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Document"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"iriPrefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gf"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"concepts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"node-926593ff-a5bf-4809-8a47-8b50affba939"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-926593ff-a5bf-4809-8a47-8b50affba939"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"concept"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#node-926593ff-a5bf-4809-8a47-8b50affba939_A"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99a20fc6-19d6-4882-8ae9-300016664e7d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FieldA1"</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"node-03d74c0b-8a01-4456-a100-9eeadbc2f4b4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-03d74c0b-8a01-4456-a100-9eeadbc2f4b4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"concept"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#node-03d74c0b-8a01-4456-a100-9eeadbc2f4b4_B"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a49c5a14-e299-4fa3-a606-a60748831153"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FieldB1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValueB1"</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"link-b4bbb7e8-4187-4049-b632-e87624ecf4aa"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-b4bbb7e8-4187-4049-b632-e87624ecf4aa"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-926593ff-a5bf-4809-8a47-8b50affba939"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-03d74c0b-8a01-4456-a100-9eeadbc2f4b4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"peerlink"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#link-b4bbb7e8-4187-4049-b632-e87624ecf4aa_peerlink"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exact"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialization"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"link-f1a82217-1471-4a9e-80dc-659979219590"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-f1a82217-1471-4a9e-80dc-659979219590"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-926593ff-a5bf-4809-8a47-8b50affba939"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-926593ff-a5bf-4809-8a47-8b50affba939"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"selflink"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#link-f1a82217-1471-4a9e-80dc-659979219590_selflink"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialization"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>When this endpoint is invoked, it creates all the concepts, relationships, their attributes and fields provided in the input.</p>
@@ -2213,20 +2270,20 @@ This API may return a 404 or empty array based on two scenarios:
 <tr>
 <td>label</td>
 <td>true</td>
-<td>&quot;New Attribute&quot;</td>
-<td>Concept Label</td>
+<td>--</td>
+<td>Concept Attribute Label</td>
 </tr>
 <tr>
 <td>description</td>
 <td>false</td>
 <td>&quot;&quot;</td>
-<td>Concept description</td>
+<td>Concept Attribute description</td>
 </tr>
 <tr>
 <td>iri</td>
 <td>false</td>
 <td></td>
-<td>Concept IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+<td>Concept Attribute IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
 </tr>
 <tr>
 <td>fields</td>
@@ -2328,8 +2385,8 @@ This API may return a 404 or empty array based on two scenarios:
 <tr>
 <td>label</td>
 <td>true</td>
-<td>&quot;New Attribute&quot;</td>
-<td>Concept Label</td>
+<td>--</td>
+<td>Concept Attribute Label</td>
 </tr>
 <tr>
 <td>description</td>
@@ -2341,7 +2398,7 @@ This API may return a 404 or empty array based on two scenarios:
 <td>iri</td>
 <td>false</td>
 <td></td>
-<td>Concept IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+<td>Concept Attribute IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
 </tr>
 <tr>
 <td>fields</td>
@@ -2374,13 +2431,14 @@ This API may return a 404 or empty array based on two scenarios:
 <aside class="notice">
 404 error if no attribute can be updated. Inability to update the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a concept with the specified id within the ekgdoc or non existence of the attribute with the specified id within the concept.
 </aside>
-<h2 id='delete-concept-attribute-under-construction'>Delete Concept Attribute (Under Construction)</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+<h2 id='delete-concept-attribute'>Delete Concept Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
   <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
   <span class="n">String</span> <span class="n">conceptId</span> <span class="o">=</span> <span class="s">"node-8a21c773-380f-4db9-92a6-f4984efd37ad"</span><span class="o">;</span>
-  <span class="n">GenericGrafoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">deleteConcept</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">conceptId</span><span class="o">));</span>
+  <span class="n">String</span> <span class="n">attribId</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+  <span class="n">GenericGrafoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">deleteConceptAttribute</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">conceptId</span><span class="o">,</span> <span class="n">attribId</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE 
-    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concepts/node-8a21c773-380f-4db9-92a6-f4984efd37ad
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concepts/node-8a21c773-380f-4db9-92a6-f4984efd37ad/attributes/attr-33c6ed7b-8437-41ce-9552-9caed3f242b9
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
@@ -2394,9 +2452,9 @@ This API may return a 404 or empty array based on two scenarios:
   </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes my concept for the specified id.</p>
+<p>This endpoint deletes the concept attribute for the specified id present within the selected concept in the ekg doc.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>DELETE https://gra.fo/api/v1/documents/&lt;docId&gt;/concepts/&lt;ID&gt;</code></p>
+<p><code>DELETE https://gra.fo/api/v1/documents/&lt;docId&gt;/concepts/&lt;conceptId&gt;/attributes/&lt;attribId&gt;</code></p>
 <h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2409,15 +2467,19 @@ This API may return a 404 or empty array based on two scenarios:
 <td>The ID of the ekg doc of which the concepts are retrieved</td>
 </tr>
 <tr>
-<td>ID</td>
-<td>The ID of the concept to delete</td>
+<td>conceptId</td>
+<td>The ID of the concept of which attribute to delete</td>
+</tr>
+<tr>
+<td>attribId</td>
+<td>The ID of the attribute to delete</td>
 </tr>
 </tbody></table>
 <h3 id='returns-5'>Returns</h3>
 <p>This returns whether the deletion succeeded. If not, then an error will be returned as per error specification at the top of this document.</p>
 
 <aside class="notice">
-404 error if no concept can be deleted. Inability to delete the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a concept with the specified id within the ekgdoc.
+404 error if no concept attribute can be deleted. Inability to delete the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a concept with the specified id within the ekgdoc or non existence of the attibute with the specified id within the concept.
 </aside>
 <h1 id='relationships'>Relationships</h1>
 <p>This entity X is blahhh</p>
