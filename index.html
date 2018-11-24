@@ -371,7 +371,7 @@
                     <a href="#get-concept-attribute" class="toc-h2 toc-link" data-title="Get Concept Attribute">Get Concept Attribute</a>
                   </li>
                   <li>
-                    <a href="#create-concept-atribute" class="toc-h2 toc-link" data-title="Create Concept Atribute">Create Concept Atribute</a>
+                    <a href="#create-concept-attribute" class="toc-h2 toc-link" data-title="Create Concept Attribute">Create Concept Attribute</a>
                   </li>
                   <li>
                     <a href="#update-concept-attribute" class="toc-h2 toc-link" data-title="Update Concept Attribute">Update Concept Attribute</a>
@@ -385,7 +385,19 @@
             <a href="#relationships" class="toc-h1 toc-link" data-title="Relationships">Relationships</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all" class="toc-h2 toc-link" data-title="Get All">Get All</a>
+                    <a href="#list-relationships" class="toc-h2 toc-link" data-title="List Relationships">List Relationships</a>
+                  </li>
+                  <li>
+                    <a href="#get-relationship" class="toc-h2 toc-link" data-title="Get Relationship">Get Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#create-relationship" class="toc-h2 toc-link" data-title="Create Relationship">Create Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#update-relationship" class="toc-h2 toc-link" data-title="Update Relationship">Update Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#delete-relationship" class="toc-h2 toc-link" data-title="Delete Relationship">Delete Relationship</a>
                   </li>
               </ul>
           </li>
@@ -393,7 +405,19 @@
             <a href="#relationship-attributes" class="toc-h1 toc-link" data-title="Relationship Attributes">Relationship Attributes</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all" class="toc-h2 toc-link" data-title="Get All">Get All</a>
+                    <a href="#list-relationship-attributes" class="toc-h2 toc-link" data-title="List Relationship Attributes">List Relationship Attributes</a>
+                  </li>
+                  <li>
+                    <a href="#get-relationship-attribute" class="toc-h2 toc-link" data-title="Get Relationship Attribute">Get Relationship Attribute</a>
+                  </li>
+                  <li>
+                    <a href="#create-relationship-attribute" class="toc-h2 toc-link" data-title="Create Relationship Attribute">Create Relationship Attribute</a>
+                  </li>
+                  <li>
+                    <a href="#update-relationship-attribute" class="toc-h2 toc-link" data-title="Update Relationship Attribute">Update Relationship Attribute</a>
+                  </li>
+                  <li>
+                    <a href="#delete-relationship-attribute" class="toc-h2 toc-link" data-title="Delete Relationship Attribute">Delete Relationship Attribute</a>
                   </li>
               </ul>
           </li>
@@ -401,7 +425,19 @@
             <a href="#specialisations" class="toc-h1 toc-link" data-title="Specialisations">Specialisations</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all" class="toc-h2 toc-link" data-title="Get All">Get All</a>
+                    <a href="#list-specialisations" class="toc-h2 toc-link" data-title="List Specialisations">List Specialisations</a>
+                  </li>
+                  <li>
+                    <a href="#get-relationship" class="toc-h2 toc-link" data-title="Get Relationship">Get Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#create-relationship" class="toc-h2 toc-link" data-title="Create Relationship">Create Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#update-relationship" class="toc-h2 toc-link" data-title="Update Relationship">Update Relationship</a>
+                  </li>
+                  <li>
+                    <a href="#delete-relationship" class="toc-h2 toc-link" data-title="Delete Relationship">Delete Relationship</a>
                   </li>
               </ul>
           </li>
@@ -1596,7 +1632,7 @@ If no more documents are available, the resulting array will be empty. This requ
 
 <!-- <img src="images/grafo_image1.png" alt="Example Image"/> -->
 
-<p><img src="images/grafo_image1.png" title="Example Image" alt="alt text" />
+<p><img src="images/grafo_image1.png" title="Example Image" alt="alt text" /><br>
 <b>Figure 1</b>: A simple example of EKG Document containing three concepts, one relationship, one self relationship and one specialisation. The numbers at the bottom of concepts and relationships represent the number of attributes.</p>
 <h1 id='fine-grained-api'>Fine Grained API</h1>
 <p>Fine grained API allows one to deal with the constituents of a EkgDocument individually at the network level. This is convenient when individual components are dealt using plain vanilla REST. Javascript API inherently provides the finegrained approach that is also scalable. We recommend using the coarse grained API when dealing via Java etc. as multiple modifications can be aggregated and dispatched to the server at one stretch and the cost of such operation is linear along with a fixed offset base cost. REST API or fine grained API in Java has the fixed offset cost overhead for each fine grained call making it less efficient. </p>
@@ -1605,6 +1641,9 @@ If no more documents are available, the resulting array will be empty. This requ
 
 <p>Coarse grained approach is recommended when multiple operations are expected to be carried out on an EKG document. Fine grained approach can be used for minor additions, updations or deletions.</p>
 <h1 id='ekg-document-coarse-grained-operations'>EKG Document - Coarse Grained Operations</h1>
+<p><a href="images/ekgdoc.png"> <img src="images/ekgdoc.png" alt="full image" /> </a>
+<b>Figure 1</b>: UML Class Diagram for EKG Document</p>
+
 <p>Following operations are supported</p>
 <h2 id='get-ekg-document'>Get EKG Document</h2>
 <p>This endpoint retrieves all the contents of an ekg document. The information includes document details, list of concepts and relationships along with their attributes and fields.</p>
@@ -1614,10 +1653,17 @@ If no more documents are available, the resulting array will be empty. This requ
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ekgDoc</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gra.fo/api/v1/documents/c7712dfe-b287-498d-a80d-1b09a9edc49a/ekg
-</span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">demoDocFetch</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">//After initial authentication..</span>
+        <span class="c1">//Refer Section on Authentication</span>
+        <span class="kd">var</span> <span class="nx">docDetails</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">getDocument</span><span class="p">(</span><span class="s2">"c7712dfe-b287-498d-a80d-1b09a9edc49a"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">ekgDoc</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">getEkgDocument</span><span class="p">(</span><span class="nx">docDetails</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ekgDoc</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span> 
+<span class="p">};</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON whose high level structure is like this:</p>
@@ -1898,7 +1944,7 @@ If no more documents are available, the resulting array will be empty. This requ
 </tr>
 <tr>
 <td>cardinality</td>
-<td>It is the value</td>
+<td>It is the cardinality value</td>
 </tr>
 <tr>
 <td>specialisation</td>
@@ -1996,6 +2042,8 @@ If no more documents are available, the resulting array will be empty. This requ
       <span class="n">c2</span><span class="o">.</span><span class="na">addField</span><span class="o">(</span><span class="n">field1</span><span class="o">);</span>
       <span class="n">Attribute</span> <span class="n">attr1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Attribute</span><span class="o">(</span><span class="s">"AttributeTest1"</span><span class="o">);</span>
       <span class="n">Attribute</span> <span class="n">attr2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Attribute</span><span class="o">(</span><span class="s">"AttributeTest2"</span><span class="o">);</span>
+      <span class="n">c2</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="n">attr1</span><span class="o">);</span>
+      <span class="n">c2</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="n">attr2</span><span class="o">);</span>
       <span class="n">Field</span> <span class="n">attrField1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">(</span><span class="s">"FieldBAttr1"</span><span class="o">);</span>
       <span class="n">Field</span> <span class="n">attrField2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">(</span><span class="s">"FieldBAttr2"</span><span class="o">);</span>
       <span class="n">attrField2</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"ValueB2"</span><span class="o">);</span>
@@ -2018,10 +2066,19 @@ If no more documents are available, the resulting array will be empty. This requ
     https://gra.fo/api/v1/documents/ekg
 <span class="c">#The output displayed below can be sent as data to the above command</span>
 <span class="c">#Read the documentation for more info</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">demoDocCreate</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">//After initial authentication..</span>
+      <span class="c1">//Refer Section on Authentication</span>
+      <span class="kd">var</span> <span class="nx">docDetails</span> <span class="o">=</span>  <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">createDocument</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="nx">docName</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">ekgDoc</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">createEkgDocument</span><span class="p">(</span><span class="nx">docDetails</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+      <span class="c1">//After creating empty ekg document from above command</span>
+      <span class="c1">//fine-grained operations have to be invoked to add elements</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span> 
+<span class="p">};</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:
@@ -2270,6 +2327,8 @@ If no more documents are available, the resulting array will be empty. This requ
 <td>3</td>
 </tr>
 </tbody></table>
+
+<p>The Entity States New and Updated are optional. The operation will be deduced from the provided input data. If the element already exists it will be updated, otherwise it will be created. However for Delete, one has to provide the Entity State.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>PUT https://gra.fo/api/v1/documents/&lt;docId&gt;/ekg</code></p>
 <h3 id='returns-3'>Returns</h3>
@@ -2286,7 +2345,15 @@ If no more documents are available, the resulting array will be empty. This requ
     <span class="o">}</span> 
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE
     https://gra.fo/api/v1/documents/446f86c7-2f0f-4fe7-9bea-c778e469b914
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="c1">//Not supported</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">demoDocDelete</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">//After initial authentication..</span>
+        <span class="c1">//Refer Section on Authentication</span>
+        <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">deleteEkgDocument</span><span class="p">(</span><span class="s2">"446f86c7-2f0f-4fe7-9bea-c778e469b914"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span> 
+<span class="p">};</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:
@@ -2364,7 +2431,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/v1/documents/&lt;docId&gt;/concepts</code></p>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/concepts</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2418,8 +2485,10 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
 
 <aside class="notice">
 This API may return a 404 or empty array based on two scenarios:
-1. 404 error due to inability to retrieve the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id. 
-2. If no concepts were present for the specified ekg doc (that is owned by you or shared with you), then an empty array of concepts is returned.
+<ol>
+  <li> 404 error due to inability to retrieve the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id.</li>
+  <li> If no concepts were present for the specified ekg doc (that is owned by you or shared with you), then an empty array of concepts is returned.</li>
+</ol>
 </aside>
 <h2 id='get-concept'>Get Concept</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
   <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
@@ -2570,6 +2639,68 @@ This API may return a 404 or empty array based on two scenarios:
 <td></td>
 <td>Y coordinate in UI</td>
 </tr>
+<tr>
+<td>color</td>
+<td>false</td>
+<td>#AACCFF</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
+</tr>
 </tbody></table>
 <h3 id='returns-3'>Returns</h3>
 <p>This returns a JSON object for the created concept. The returned concept contains id and iri assigned.</p>
@@ -2629,40 +2760,88 @@ This API may return a 404 or empty array based on two scenarios:
 <table><thead>
 <tr>
 <th>Name</th>
-<th>Mandatory</th>
-<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>label</td>
-<td>true</td>
-<td>&quot;New Concept&quot;</td>
 <td>Concept Label</td>
 </tr>
 <tr>
 <td>description</td>
-<td>false</td>
-<td>&quot;&quot;</td>
 <td>Concept description</td>
 </tr>
 <tr>
 <td>iri</td>
-<td>false</td>
-<td></td>
-<td>Concept IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+<td>Concept IRI</td>
 </tr>
 <tr>
 <td>positionX</td>
-<td>false</td>
-<td></td>
 <td>X coordinate in UI</td>
 </tr>
 <tr>
 <td>positionY</td>
-<td>false</td>
-<td></td>
 <td>Y coordinate in UI</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list-2'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
 </tr>
 </tbody></table>
 <h3 id='returns-4'>Returns</h3>
@@ -2723,7 +2902,7 @@ This API may return a 404 or empty array based on two scenarios:
 
 <p>All concept attribute endpoints are fine grained network operations. You can achieve all of these operations at one go using the coarse grained operations on the EkgDocument.</p>
 <h2 id='list-concept-attributes'>List Concept Attributes</h2>
-<p>This endpoint retrieves all the attributes for a concept within a ekg document. Natural orderinf of attributes is followed. This generally happens to be the order of addition. No other sort criteria can be applied. No filtering or pagination is supported.</p>
+<p>This endpoint retrieves all the attributes for a concept within a ekg document. Natural order of attributes is followed. This generally happens to be the order of addition. No other sort criteria can be applied. No filtering or pagination is supported.</p>
 <pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span>  <span class="o">{</span>
     <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="o">...;</span> <span class="n">Sring</span> <span class="n">conceptId</span> <span class="o">=</span> <span class="s">"..."</span><span class="o">;</span>
     <span class="n">List</span><span class="o">&lt;</span><span class="n">Attribute</span><span class="o">&gt;</span> <span class="n">attribList</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getAllConceptAttributes</span><span class="o">(</span>
@@ -2761,7 +2940,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
     </span><span class="err">...</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/v1/documents/&lt;docId&gt;/concepts/&lt;conceptId&gt;/attributes</code></p>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/concepts/&lt;conceptId&gt;/attributes</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -2783,8 +2962,10 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
 
 <aside class="notice">
 This API may return a 404 or empty array based on two scenarios:
-1. 404 error due to inability to retrieve the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or concept id. 
-2. If no attributes were present for the specified ekg doc (that is owned by you or shared with you) and concept id, then an empty array of attributes is returned.
+<ol>
+  <li> 404 error due to inability to retrieve the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or concept id. </li>
+  <li> If no attributes were present for the specified ekg doc (that is owned by you or shared with you) and concept id, then an empty array of attributes is returned.</li>
+</ol>
 </aside>
 <h2 id='get-concept-attribute'>Get Concept Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
   <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
@@ -2846,7 +3027,7 @@ This API may return a 404 or empty array based on two scenarios:
 <aside class="notice">
 404 error if no attribute retrieved. Inability to retrieve the attribute could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a concept with the specified id within the ekgdoc or non existence of an attribute within the concept for the specified id.
 </aside>
-<h2 id='create-concept-atribute'>Create Concept Atribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+<h2 id='create-concept-attribute'>Create Concept Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
   <span class="n">Attribute</span> <span class="n">attrib</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Attribute</span><span class="o">();</span>
   <span class="n">attrib</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"MyAttrib_03"</span><span class="o">);</span>
   <span class="n">attrib</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"Sample description"</span><span class="o">);</span>
@@ -2960,7 +3141,7 @@ This API may return a 404 or empty array based on two scenarios:
   <span class="n">Concept</span> <span class="n">concept</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getConcept</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> 
                          <span class="s">"node-8a21c773-380f-4db9-92a6-f4984efd37ad"</span><span class="o">);</span>
   <span class="n">List</span><span class="o">&lt;</span><span class="n">Attribute</span><span class="o">&gt;</span> <span class="n">attribList</span> <span class="o">=</span> <span class="n">concept</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">();</span>
-  <span class="n">Attribute</span> <span class="n">attrib</span> <span class="o">=</span> <span class="n">attribList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="o">/</span><span class="n">assuming</span> <span class="n">there</span> <span class="n">are</span> <span class="n">atleast</span> <span class="mi">2</span>
+  <span class="n">Attribute</span> <span class="n">attrib</span> <span class="o">=</span> <span class="n">attribList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//assuming there are atleast 2</span>
   <span class="n">attrib</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"UpdateAttribLbl"</span><span class="o">);</span>
   <span class="n">attrib</span><span class="o">.</span><span class="na">setXsdDataType</span><span class="o">(</span><span class="n">XsdDataType</span><span class="o">.</span><span class="na">DECIMAL</span><span class="o">);</span>
   <span class="n">attrib</span><span class="o">.</span><span class="na">setCardinalityType</span><span class="o">(</span><span class="n">CardinalityType</span><span class="o">.</span><span class="na">EXACT</span><span class="o">);</span>
@@ -3121,12 +3302,1534 @@ This API may return a 404 or empty array based on two scenarios:
 404 error if no concept attribute can be deleted. Inability to delete the concept could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a concept with the specified id within the ekgdoc or non existence of the attibute with the specified id within the concept.
 </aside>
 <h1 id='relationships'>Relationships</h1>
-<p>This entity X is blahhh</p>
-<h2 id='get-all'>Get All</h2><h1 id='relationship-attributes'>Relationship Attributes</h1>
-<p>This entity X is blahhh</p>
-<h2 id='get-all'>Get All</h2><h1 id='specialisations'>Specialisations</h1>
-<p>This entity X is blahhh</p>
-<h2 id='get-all'>Get All</h2><h1 id='concept-fields'>Concept Fields</h1>
+<p>Relationship is the equivalent of an edge in graph. It is a directed line that connects two nodes. It represents inter-relationship between two Concepts. There are possibilities that a relationship starts and ends at the same node. This is also supported.</p>
+
+<p>Each relationship is identified by an id beginning with <code>link-</code></p>
+
+<p>All relationship endpoints are fine grained network operations. You can achieve all of these operations at one go using the coarse grained operations on the EkgDocument.</p>
+<h2 id='list-relationships'>List Relationships</h2>
+<p>This endpoint retrieves all the relationships within an EKG document. As the relationships are part of a graph, only the natural order of relationships is followed. This generally happens to be the order of addition. No other sort criteria can be applied. No filtering or pagination is supported.</p>
+<pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span><span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Relationship</span><span class="o">&gt;</span> <span class="n">relList</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getAllRelationships</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">));</span>
+    <span class="n">relList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">rel</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rel</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Get all relationships for the doc with id 536a35f8-cb7b-41c6-a834-c4c03516657a</span>
+curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this: 
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exact"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8d308e21-fc40-403f-b667-2de545219d4a"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Field"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Value"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"attrGroup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attrGrp-6b610b09-701a-4b5b-9138-8eeae407ac50"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute1_linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">}],</span><span class="w">
+            </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-113ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob2"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+</tbody></table>
+<h3 id='returns'>Returns</h3>
+<p>This returns an array of all relationships for the specified doc id. Each entry in the array is a separate relationship object.</p>
+
+<p>Relationship Properties are defined in the section titled <code>EKG Document -  Coarse Grained Operations</code></p>
+
+<aside class="notice">
+This API may return a 404 or empty array based on two scenarios:
+<ol>
+    <li> 404 error due to inability to retrieve the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id.</li> 
+    <li> If no relationships were present for the specified ekg doc (that is owned by you or shared with you), then an empty array of relationships is returned.</li>
+</ol>
+</aside>
+<h2 id='get-relationship'>Get Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rel</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exact"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8d308e21-fc40-403f-b667-2de545219d4a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Field"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Value"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="s2">"attrGroup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attrGrp-6b610b09-701a-4b5b-9138-8eeae407ac50"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute1_linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific relationship by id within a ekg document with specified docid.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='returns-2'>Returns</h3>
+<p>This returns a JSON object for the relationship.</p>
+
+<aside class="notice">
+404 error if no relationship is retrieved. Inability to retrieve the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h2 id='create-relationship'>Create Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span><span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();)</span> <span class="o">{</span>
+    <span class="c1">//concept1 and concept2 are start and end nodes of a relationship</span>
+    <span class="n">Relationship</span> <span class="n">relationship</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Relationship</span><span class="o">(</span><span class="n">concept1</span><span class="o">,</span> <span class="n">concept2</span><span class="o">,</span> <span class="s">"link1to2"</span><span class="o">,</span> <span class="n">RelationshipType</span><span class="o">.</span><span class="na">PEER</span><span class="o">);</span>
+    <span class="n">relationship</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"Demo Add Relationship"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">newRelationship</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">createRelationship</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">),</span> <span class="n">relationship</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newRelationship</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "link1to2", "description": "Demo Add Relationship",
+"fromConceptId":"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91",
+"toConceptId":"node-74232afd-fd3b-4006-99d0-5487c23d83d5"}'</span> 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link1to2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Add Relationship"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates a relationship within the specified ekg document. </p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+</tbody></table>
+<h3 id='json-body'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>true</td>
+<td></td>
+<td>Relationship Label</td>
+</tr>
+<tr>
+<td>fromConceptId</td>
+<td>true</td>
+<td></td>
+<td>Id of the start node</td>
+</tr>
+<tr>
+<td>toConceptId</td>
+<td>true</td>
+<td></td>
+<td>Id of the end node</td>
+</tr>
+<tr>
+<td>description</td>
+<td>false</td>
+<td>&quot;&quot;</td>
+<td>Relationship description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>false</td>
+<td><doc iri>+<unique id></td>
+<td>Relationship IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+</tr>
+<tr>
+<td>positionX</td>
+<td>false</td>
+<td></td>
+<td>X coordinate in UI</td>
+</tr>
+<tr>
+<td>positionY</td>
+<td>false</td>
+<td></td>
+<td>Y coordinate in UI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>false</td>
+<td>null</td>
+<td>Exact, Max, Min values can be provided</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>false</td>
+<td>null</td>
+<td>cardinality value</td>
+</tr>
+<tr>
+<td>specialisation</td>
+<td>false</td>
+<td>false</td>
+<td>A flag to identify if a relationship is specialisation or not.</td>
+</tr>
+<tr>
+<td>color</td>
+<td>false</td>
+<td>#000000</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
+</tr>
+<tr>
+<td>BLACK</td>
+<td>#000000</td>
+</tr>
+</tbody></table>
+<h3 id='returns-3'>Returns</h3>
+<p>This returns a JSON object for the created relationship. The returned relationship contains id and iri assigned.</p>
+
+<aside class="notice">
+404 error upon inability to retrieve ekgdoc due to permissions issue on ekgdoc, non existence of the doc with the specified id, source or end nodes do not exist.
+</aside>
+<h2 id='update-relationship'>Update Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">relationshipForUpdate</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> 
+                 <span class="s">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="o">);</span>
+    <span class="n">relationshipForUpdate</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"UpdatedRel"</span><span class="o">);</span>
+    <span class="n">relationship</span><span class="o">.</span><span class="na">setIri</span><span class="o">(</span><span class="s">"www.abc.com/schema/rel1"</span><span class="o">);</span>
+
+    <span class="n">Relationship</span> <span class="n">updatedRelationship</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">updateRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipForUpdate</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">updatedRelationship</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "UpdatedRel", "iri": "www.abc.com/schema/rel1"}'</span> 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-245ae2a0-d7de-466b-b552-8da441ecb2e9
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatedRel"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Add Relationship"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.abc.com/schema/rel1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates relationship with the specified id.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://gra.fo/api/v1/documents/&lt;docId&gt;relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to update</td>
+</tr>
+</tbody></table>
+<h3 id='json-body-2'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>Relationship Label</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Relationship description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>Relationship IRI</td>
+</tr>
+<tr>
+<td>positionX</td>
+<td>X coordinate in UI</td>
+</tr>
+<tr>
+<td>positionY</td>
+<td>Y coordinate in UI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>Exact, Max, Min values can be provided</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>cardinality value</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list-2'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
+</tr>
+<tr>
+<td>BLACK</td>
+<td>#000000</td>
+</tr>
+</tbody></table>
+<h3 id='returns-4'>Returns</h3>
+<p>This returns a JSON object for the updated relationship.</p>
+
+<aside class="notice">
+404 error if no relationship can be updated. Inability to update the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h2 id='delete-relationship'>Delete Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="o">;</span>
+  <span class="n">GenericGrafoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">deleteRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-245ae2a0-d7de-466b-b552-8da441ecb2e9
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes relationship for the specified id.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to delete</td>
+</tr>
+</tbody></table>
+<h3 id='returns-5'>Returns</h3>
+<p>This returns whether the deletion succeeded. If not, then an error will be returned as per error specification at the top of this document.</p>
+
+<aside class="notice">
+404 error if no relationship can be deleted. Inability to delete the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h1 id='relationship-attributes'>Relationship Attributes</h1>
+<p>The term attribute refers to a feature that is part of a concept or relationship. It is a property that has a name, data type and cardinality. </p>
+
+<p>Relationship attribute is identified with an id beginning with <code>linkattr-</code></p>
+
+<p>All relationship attribute endpoints are fine grained network operations. You can achieve all of these operations at one go using the coarse grained operations on the EkgDocument.</p>
+<h2 id='list-relationship-attributes'>List Relationship Attributes</h2>
+<p>This endpoint retrieves all the attributes for a relationship within an ekg document. Natural order of attributes is followed. This generally happens to be the order of addition. No other sort criteria can be applied. No filtering or pagination is supported.</p>
+<pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span>  <span class="o">{</span>
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span> 
+    <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Attribute</span><span class="o">&gt;</span> <span class="n">attribList</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getAllRelationshipAttributes</span><span class="o">(</span>
+        <span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">);</span>
+    <span class="n">attribList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">attrib</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">attrib</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Get all attributes for doc and relationship</span>
+curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd/attributes
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this: 
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute2_linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"xsdDataType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"min"</span><span class="p">},</span><span class="w">
+        </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca397b5b-7303-40ae-817f-b0834c7e2432"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Field1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value1"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">......</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;relId&gt;/attributes</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc to which the relationship belongs</td>
+</tr>
+<tr>
+<td>relId</td>
+<td>The ID of relationship of which the attributes are retrieved</td>
+</tr>
+</tbody></table>
+<h3 id='returns'>Returns</h3>
+<p>This returns an array of all attributes for the specified doc id and relationship id. Each entry in the array is a separate attribute object. Attribute Properties are defined in the section titled <code>EKG Document Coarse Grained Operations</code></p>
+
+<aside class="notice">
+This API may return a 404 or empty array based on two scenarios:
+<ol>
+    <li> 404 error due to inability to retrieve the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or relationship id. </li>
+    <li> If no attributes were present for the specified ekg doc (that is owned by you or shared with you) and relationship id, then an empty array of attributes is returned.</li>
+</ol>
+</aside>
+<h2 id='get-relationship-attribute'>Get Relationship Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">;</span> 
+  <span class="n">String</span> <span class="n">attrId</span> <span class="o">=</span> <span class="s">"linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span><span class="o">;</span>
+  <span class="n">Attribute</span> <span class="n">attr</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationshipAttribute</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">,</span> <span class="n">attrId</span><span class="o">);</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">attr</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd/attributes/linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute2_linkattr-b315d309-8583-45a6-b68d-86c929df54db"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"xsdDataType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"min"</span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca397b5b-7303-40ae-817f-b0834c7e2432"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Field1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific relationship attribute by id within a ekg document with specified docid and for a specific relationshipid.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;relId&gt;/attributes/&lt;attribId&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>relId</td>
+<td>ID of the relationship</td>
+</tr>
+<tr>
+<td>attribId</td>
+<td>The ID of the attribute to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='returns-2'>Returns</h3>
+<p>This returns a JSON object for the attribute.</p>
+
+<aside class="notice">
+404 error if no attribute retrieved. Inability to retrieve the attribute could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc or non existence of an attribute within the relationship for the specified id.
+</aside>
+<h2 id='create-relationship-attribute'>Create Relationship Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">Attribute</span> <span class="n">attrib</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Attribute</span><span class="o">();</span>
+    <span class="n">attrib</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"MyAttrib_01"</span><span class="o">);</span>
+    <span class="n">attrib</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"Sample description"</span><span class="o">);</span>
+    <span class="n">attrib</span><span class="o">.</span><span class="na">setXsdDataType</span><span class="o">(</span><span class="n">XsdDataType</span><span class="o">.</span><span class="na">DATETIME</span><span class="o">);</span>
+    <span class="n">attrib</span><span class="o">.</span><span class="na">setCardinalityType</span><span class="o">(</span><span class="n">CardinalityType</span><span class="o">.</span><span class="na">MIN</span><span class="o">);</span>
+    <span class="n">attrib</span><span class="o">.</span><span class="na">setCardinlaity</span><span class="o">(</span><span class="s">"3"</span><span class="o">);</span>
+
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+    <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span>
+    <span class="n">Attribute</span> <span class="n">attrCreated</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">addRelAttribute</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">,</span> <span class="n">attrib</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "MyAttrib_01", "description": "Sample Description", "cardinalityType": "min", "cardinality":"3", "xsdDataType":"datetime"}'</span>
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd/attributes
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attr-9aaf949e-d4d4-4749-b561-9a762757a1d1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MyAttrib_01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Description"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#attr-9aaf949e-d4d4-4749-b561-9a762757a1d1_MyAttrib_01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"xsdDataType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"min"</span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates an attribute within the specified ekg document and relationship. </p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;relId&gt;/attributes</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>relId</td>
+<td>The relationship id for which the attribute is created</td>
+</tr>
+</tbody></table>
+<h3 id='json-body'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>true</td>
+<td>--</td>
+<td>Relationship Attribute Label</td>
+</tr>
+<tr>
+<td>description</td>
+<td>false</td>
+<td>&quot;&quot;</td>
+<td>Relationship Attribute description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>false</td>
+<td></td>
+<td>Relationship Attribute IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>false</td>
+<td>empty</td>
+<td>array of Field objects</td>
+</tr>
+<tr>
+<td>xsdDataType</td>
+<td>false</td>
+<td>null</td>
+<td>May be null, boolean, string, float, double, decimal, long, short, integer, int, dateTime, anyURI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>false</td>
+<td>null</td>
+<td>May be exact, min, max</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>false</td>
+<td>null</td>
+<td>cardinality value</td>
+</tr>
+</tbody></table>
+<h3 id='returns-3'>Returns</h3>
+<p>This returns a JSON object for the created relationship attribute. The returned relationship attribute contains id and iri assigned.</p>
+
+<aside class="notice">
+404 error upon inability to retrieve ekgdoc due to permissions issue on ekgdoc, non existence of the doc with the specified id, non existence of the specified relationship id in the ekg doc
+</aside>
+<h2 id='update-relationship-attribute'>Update Relationship Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+  <span class="n">Relationship</span> <span class="n">relationship</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> 
+                         <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">);</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Attribute</span><span class="o">&gt;</span> <span class="n">attribList</span> <span class="o">=</span> <span class="n">relationship</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">();</span>
+  <span class="n">Attribute</span> <span class="n">attrib</span> <span class="o">=</span> <span class="n">attribList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//assuming there are atleast 2</span>
+  <span class="n">attrib</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"UpdateAttribLbl"</span><span class="o">);</span>
+  <span class="n">attrib</span><span class="o">.</span><span class="na">setXsdDataType</span><span class="o">(</span><span class="n">XsdDataType</span><span class="o">.</span><span class="na">DECIMAL</span><span class="o">);</span>
+  <span class="n">attrib</span><span class="o">.</span><span class="na">setCardinalityType</span><span class="o">(</span><span class="n">CardinalityType</span><span class="o">.</span><span class="na">MIN</span><span class="o">);</span>
+  <span class="n">attrib</span><span class="o">.</span><span class="na">setCardinality</span><span class="o">(</span><span class="s">"20"</span><span class="o">);</span>
+  <span class="n">Attribute</span> <span class="n">updatedAttr</span> <span class="o">=</span> 
+        <span class="n">gClient</span><span class="o">.</span><span class="na">updateRelationshipAttribute</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">,</span> <span class="n">attrib</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "UpdateAttribLbl", "cardinality": "20", "cardinalityType": "min", "xsdDataType":"decimal" }'</span> 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd/attributes/attr-9aaf949e-d4d4-4749-b561-9a762757a1d1
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attr-9aaf949e-d4d4-4749-b561-9a762757a1d1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdateAttribLbl"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Description"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg#attr-9aaf949e-d4d4-4749-b561-9a762757a1d1_MyAttrib_01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"xsdDataType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"decimal"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"min"</span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates attribute with the specified  attribute id within the specified relationship and ekg doc.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;relId&gt;/attributes/&lt;attribId&gt;</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The Id of the ekg doc of which the relationship and attributes are retrieved</td>
+</tr>
+<tr>
+<td>relId</td>
+<td>The Id of the relationship</td>
+</tr>
+<tr>
+<td>attribId</td>
+<td>Id of attribute to update</td>
+</tr>
+</tbody></table>
+<h3 id='json-body-2'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>Relationship Attribute Label</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Relationship description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>Relationship Attribute IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>array of Field objects</td>
+</tr>
+<tr>
+<td>xsdDataType</td>
+<td>May be null, boolean, string, float, double, decimal, long, short, integer, int, dateTime, anyURI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>May be null, exact, min, max</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>cardinality value</td>
+</tr>
+</tbody></table>
+<h3 id='returns-4'>Returns</h3>
+<p>This returns a JSON object for the updated attribute.</p>
+
+<aside class="notice">
+404 error if no attribute can be updated. Inability to update the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc or non existence of the attribute with the specified id within the relationship.
+</aside>
+<h2 id='delete-relationship-attribute'>Delete Relationship Attribute</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">;</span>
+  <span class="n">String</span> <span class="n">attribId</span> <span class="o">=</span> <span class="s">"attr-9aaf949e-d4d4-4749-b561-9a762757a1d1"</span><span class="o">;</span>
+  <span class="n">GenericGrafoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">deleteRelationshipAttribute</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">,</span> <span class="n">attribId</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd/attributes/attr-9aaf949e-d4d4-4749-b561-9a762757a1d1
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes the relationship attribute for the specified id present within the selected relationship in the ekg doc.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;relId&gt;/attributes/&lt;attribId&gt;</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>relId</td>
+<td>The ID of the relationship of which attribute to delete</td>
+</tr>
+<tr>
+<td>attribId</td>
+<td>The ID of the attribute to delete</td>
+</tr>
+</tbody></table>
+<h3 id='returns-5'>Returns</h3>
+<p>This returns whether the deletion succeeded. If not, then an error will be returned as per error specification at the top of this document.</p>
+
+<aside class="notice">
+404 error if no relationship attribute can be deleted. Inability to delete the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc or non existence of the attibute with the specified id within the relationship.
+</aside>
+<h1 id='specialisations'>Specialisations</h1>
+<p>Specialisation is a type of relationship that mainly depicts parent-child relationship between two concepts. 
+Each specialisation is identified by an id beginning with <code>link-</code></p>
+
+<p>All specialisation endpoints are fine grained network operations. You can achieve all of these operations at one go using the coarse grained operations on the EkgDocument.</p>
+<h2 id='list-specialisations'>List Specialisations</h2>
+<p>This endpoint retrieves all the specialisations within an EKG document. As the relationships are part of a graph, only the natural order of relationships is followed. This generally happens to be the order of addition. No other sort criteria can be applied. No filtering or pagination is supported.</p>
+<pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span><span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Relationship</span><span class="o">&gt;</span> <span class="n">relList</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getAllRelationships</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">));</span>
+    <span class="n">relList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">rel</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rel</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Get all relationships for the doc with id 536a35f8-cb7b-41c6-a834-c4c03516657a</span>
+curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this: 
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exact"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8d308e21-fc40-403f-b667-2de545219d4a"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Field"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Value"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"attrGroup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attrGrp-6b610b09-701a-4b5b-9138-8eeae407ac50"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute1_linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">}],</span><span class="w">
+            </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-113ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob2"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+</tbody></table>
+<h3 id='returns'>Returns</h3>
+<p>This returns an array of all relationships for the specified doc id. Each entry in the array is a separate relationship object.</p>
+
+<p>Relationship Properties are defined in the section titled <code>EKG Document -  Coarse Grained Operations</code></p>
+
+<aside class="notice">
+This API may return a 404 or empty array based on two scenarios:
+<ol>
+    <li> 404 error due to inability to retrieve the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id.</li> 
+    <li> If no relationships were present for the specified ekg doc (that is owned by you or shared with you), then an empty array of relationships is returned.</li>
+</ol>
+</aside>
+<h2 id='get-relationship'>Get Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="s">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rel</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-2e2069ba-3523-4731-8c41-35189796f7dd"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkAtoB1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exact"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8d308e21-fc40-403f-b667-2de545219d4a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Field"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Value"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="s2">"attrGroup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attrGrp-6b610b09-701a-4b5b-9138-8eeae407ac50"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relattribute1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/relattribute1_linkattr-f132601f-34ee-4c8a-8486-b83c867174f7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="s2">"lastUpdatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f76351f3-be89-485c-a851-19508a03bbf7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific relationship by id within a ekg document with specified docid.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='returns-2'>Returns</h3>
+<p>This returns a JSON object for the relationship.</p>
+
+<aside class="notice">
+404 error if no relationship is retrieved. Inability to retrieve the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h2 id='create-relationship'>Create Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span><span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();)</span> <span class="o">{</span>
+    <span class="c1">//concept1 and concept2 are start and end nodes of a relationship</span>
+    <span class="n">Relationship</span> <span class="n">relationship</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Relationship</span><span class="o">(</span><span class="n">concept1</span><span class="o">,</span> <span class="n">concept2</span><span class="o">,</span> <span class="s">"link1to2"</span><span class="o">,</span> <span class="n">RelationshipType</span><span class="o">.</span><span class="na">PEER</span><span class="o">);</span>
+    <span class="n">relationship</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"Demo Add Relationship"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">newRelationship</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">createRelationship</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">),</span> <span class="n">relationship</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newRelationship</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "link1to2", "description": "Demo Add Relationship",
+"fromConceptId":"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91",
+"toConceptId":"node-74232afd-fd3b-4006-99d0-5487c23d83d5"}'</span> 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link1to2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Add Relationship"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gra.fo/schema/untitled-ekg/linkatob2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates a relationship within the specified ekg document. </p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+</tbody></table>
+<h3 id='json-body'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>true</td>
+<td></td>
+<td>Relationship Label</td>
+</tr>
+<tr>
+<td>fromConceptId</td>
+<td>true</td>
+<td></td>
+<td>Id of the start node</td>
+</tr>
+<tr>
+<td>toConceptId</td>
+<td>true</td>
+<td></td>
+<td>Id of the end node</td>
+</tr>
+<tr>
+<td>description</td>
+<td>false</td>
+<td>&quot;&quot;</td>
+<td>Relationship description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>false</td>
+<td><doc iri>+<unique id></td>
+<td>Relationship IRI. A value is auto assigned by Grafo Server if not specified in create request</td>
+</tr>
+<tr>
+<td>positionX</td>
+<td>false</td>
+<td></td>
+<td>X coordinate in UI</td>
+</tr>
+<tr>
+<td>positionY</td>
+<td>false</td>
+<td></td>
+<td>Y coordinate in UI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>false</td>
+<td>null</td>
+<td>Exact, Max, Min values can be provided</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>false</td>
+<td>null</td>
+<td>cardinality value</td>
+</tr>
+<tr>
+<td>specialisation</td>
+<td>false</td>
+<td>false</td>
+<td>A flag to identify if a relationship is specialisation or not.</td>
+</tr>
+<tr>
+<td>color</td>
+<td>false</td>
+<td>#000000</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
+</tr>
+<tr>
+<td>BLACK</td>
+<td>#000000</td>
+</tr>
+</tbody></table>
+<h3 id='returns-3'>Returns</h3>
+<p>This returns a JSON object for the created relationship. The returned relationship contains id and iri assigned.</p>
+
+<aside class="notice">
+404 error upon inability to retrieve ekgdoc due to permissions issue on ekgdoc, non existence of the doc with the specified id, source or end nodes do not exist.
+</aside>
+<h2 id='update-relationship'>Update Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+    <span class="n">Relationship</span> <span class="n">relationshipForUpdate</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">getRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> 
+                 <span class="s">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="o">);</span>
+    <span class="n">relationshipForUpdate</span><span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="s">"UpdatedRel"</span><span class="o">);</span>
+    <span class="n">relationship</span><span class="o">.</span><span class="na">setIri</span><span class="o">(</span><span class="s">"www.abc.com/schema/rel1"</span><span class="o">);</span>
+
+    <span class="n">Relationship</span> <span class="n">updatedRelationship</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">updateRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipForUpdate</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">updatedRelationship</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST 
+    -d <span class="s1">'{"label": "UpdatedRel", "iri": "www.abc.com/schema/rel1"}'</span> 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-245ae2a0-d7de-466b-b552-8da441ecb2e9
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-19d8dee3-e5ae-4337-86af-cc4bb415ea91"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toConceptId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node-74232afd-fd3b-4006-99d0-5487c23d83d5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatedRel"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Add Relationship"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.abc.com/schema/rel1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinalityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cardinality"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionX"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positionY"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates relationship with the specified id.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://gra.fo/api/v1/documents/&lt;docId&gt;relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to update</td>
+</tr>
+</tbody></table>
+<h3 id='json-body-2'>JSON Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>Relationship Label</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Relationship description</td>
+</tr>
+<tr>
+<td>iri</td>
+<td>Relationship IRI</td>
+</tr>
+<tr>
+<td>positionX</td>
+<td>X coordinate in UI</td>
+</tr>
+<tr>
+<td>positionY</td>
+<td>Y coordinate in UI</td>
+</tr>
+<tr>
+<td>cardinalityType</td>
+<td>Exact, Max, Min values can be provided</td>
+</tr>
+<tr>
+<td>cardinality</td>
+<td>cardinality value</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Hex code of the RGB values. List of colours that can be used is provided below.</td>
+</tr>
+</tbody></table>
+<h3 id='colour-list-2'>Colour List</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Hex Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AMBER_YELLOW</td>
+<td>#fdc344</td>
+</tr>
+<tr>
+<td>LEMON_YELLOW</td>
+<td>#e2fd24</td>
+</tr>
+<tr>
+<td>GREEN</td>
+<td>#5ff263</td>
+</tr>
+<tr>
+<td>CYAN</td>
+<td>#6FF2CD</td>
+</tr>
+<tr>
+<td>PASTEL_BLUE</td>
+<td>#AACCFF</td>
+</tr>
+<tr>
+<td>SKY_BLUE</td>
+<td>#50A4FD</td>
+</tr>
+<tr>
+<td>STEEL_BLUE</td>
+<td>#717CFD</td>
+</tr>
+<tr>
+<td>VIOLET</td>
+<td>#C88DEF</td>
+</tr>
+<tr>
+<td>CORAL_RED</td>
+<td>#ED5C5C</td>
+</tr>
+<tr>
+<td>ORANGE</td>
+<td>#ea874d</td>
+</tr>
+<tr>
+<td>BROWN</td>
+<td>#ccb487</td>
+</tr>
+<tr>
+<td>LIGHT_GREY</td>
+<td>#d4d4d4</td>
+</tr>
+<tr>
+<td>BLACK</td>
+<td>#000000</td>
+</tr>
+</tbody></table>
+<h3 id='returns-4'>Returns</h3>
+<p>This returns a JSON object for the updated relationship.</p>
+
+<aside class="notice">
+404 error if no relationship can be updated. Inability to update the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h2 id='delete-relationship'>Delete Relationship</h2><pre class="highlight java tab-java"><code><span class="k">try</span> <span class="o">(</span> <span class="n">GrafoClient</span> <span class="n">gClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GrafoClient</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="n">UUID</span> <span class="n">docId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"536a35f8-cb7b-41c6-a834-c4c03516657a"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">relationshipId</span> <span class="o">=</span> <span class="s">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="o">;</span>
+  <span class="n">GenericGrafoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">gClient</span><span class="o">.</span><span class="na">deleteRelationship</span><span class="o">(</span><span class="n">docId</span><span class="o">,</span> <span class="n">relationshipId</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE 
+    https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relationships/link-245ae2a0-d7de-466b-b552-8da441ecb2e9
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:
+(Java and Javascript map JSON to their respective data structures)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes relationship for the specified id.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://gra.fo/api/v1/documents/&lt;docId&gt;/relationships/&lt;id&gt;</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>docId</td>
+<td>The ID of the ekg doc of which the relationships are retrieved</td>
+</tr>
+<tr>
+<td>id</td>
+<td>The ID of the relationship to delete</td>
+</tr>
+</tbody></table>
+<h3 id='returns-5'>Returns</h3>
+<p>This returns whether the deletion succeeded. If not, then an error will be returned as per error specification at the top of this document.</p>
+
+<aside class="notice">
+404 error if no relationship can be deleted. Inability to delete the relationship could either be due to permissions issue on ekgdoc, non existence of the doc with the specified id or non existence of a relationship with the specified id within the ekgdoc.
+</aside>
+<h1 id='concept-fields'>Concept Fields</h1>
 <p>Field is in Concept</p>
 <h2 id='list-concept-fields'>List Concept Fields</h2><h2 id='get-concept-field'>Get Concept Field</h2><h2 id='create-concept-field'>Create Concept Field</h2><h2 id='update-concept-field'>Update Concept Field</h2><h2 id='delete-concept-field'>Delete Concept Field</h2><h1 id='concept-attribute-fields'>Concept Attribute Fields</h1>
 <p>Field is in Concept Attribute</p>
