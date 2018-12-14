@@ -3743,7 +3743,7 @@ This API may return a 404 or empty array based on two scenarios:
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
       <span class="cm">/*********************
       Parameters in Order:
-      Label, PositionX, PositionY, Description, Color, Fields, Mappings, Iri, ConceptId
+      Label, PositionX, PositionY, Description, Color, Fields, reserved placeholder which is null, Iri, ConceptId
       **********************/</span>
       <span class="kd">var</span> <span class="nx">updatedConcept</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">updateConcept</span><span class="p">(</span><span class="s2">"UpdateConceptLbl"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"90"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span><span class="s2">"node-8a21c773-380f-4db9-92a6-f4984efd37ad"</span><span class="p">);</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">updatedConcept</span><span class="p">);</span>
@@ -4231,7 +4231,7 @@ This API may return a 404 or empty array based on two scenarios:
 
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
       <span class="cm">/*********************
-      Parameters in Order: Label, Description, Fields, Mappings, XsdDataType, CardinalityType, Cardinality, Iri, Id, ConceptId
+      Parameters in Order: Label, Description, Fields, reserved placeholder which is null, XsdDataType, CardinalityType, Cardinality, Iri, Id, ConceptId
       **********************/</span>
       <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">updateAttributeToConcept</span><span class="p">(</span><span class="s2">"UpdateAttribLbl"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">,</span> <span class="s2">"20"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"attr-33c6ed7b-8437-41ce-9552-9caed3f242b9"</span><span class="p">,</span> <span class="s2">"node-8a21c773-380f-4db9-92a6-f4984efd37ad"</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
@@ -4803,7 +4803,7 @@ This API may return a 404 or empty array based on two scenarios:
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
       <span class="cm">/*********************
       Parameters in Order:
-      Label, Specialization, Description, Color, Fields, Mappings, CardinalityType, Cardinality, PositionX, PositionY, Iri, Id
+      Label, Specialization, Description, Color, Fields, reserved placeholder which is null, CardinalityType, Cardinality, PositionX, PositionY, Iri, Id
       **********************/</span>
       <span class="kd">var</span> <span class="nx">updatedRel</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">updateRelationship</span><span class="p">(</span><span class="s2">"UpdatedRel"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">"www.abc.com/schema/rel1"</span><span class="p">,</span> <span class="s2">"link-245ae2a0-d7de-466b-b552-8da441ecb2e9"</span><span class="p">);</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">updatedRel</span><span class="p">);</span>
