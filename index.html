@@ -249,6 +249,9 @@
               </ul>
           </li>
           <li>
+            <a href="#logging" class="toc-h1 toc-link" data-title="Logging">Logging</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -655,6 +658,10 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <td>Gone -- The entity requested has been removed from our servers.</td>
 </tr>
 <tr>
+<td>418</td>
+<td>The request was not completely processed.</td>
+</tr>
+<tr>
 <td>429</td>
 <td>Too Many Requests -- You&#39;re requesting too many Grafo Entities! Slow down!</td>
 </tr>
@@ -727,7 +734,71 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <li>Attribute (both Concept and Relationship Attributes)</li>
 <li>Field (Concept Field, Relationship Field, Concept Attribute Field, and  Relationship Attribute Field)</li>
 </ol>
-<h1 id='authentication'>Authentication</h1>
+<h1 id='logging'>Logging</h1>
+<p>Grafo-client provides logging feature. 
+<br><br>Java uses slf4j. The logging can be configured in logback.xml.
+<br><br>Javascript uses winston logger. More information on this is available at <a href = "https://www.npmjs.com/package/winston">winston</a></p>
+<pre class="highlight java tab-java"><code><span class="nd">@slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">demo</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createConcept</span> <span class="o">()</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Creating Concept"</span><span class="o">);</span>
+    <span class="o">.......</span>
+
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="s1">'use strict'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">winston</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'winston'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">GrafoClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'grafo-client/lib/grafo_client'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">logOptions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">file</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">level</span><span class="p">:</span> <span class="s1">'debug'</span><span class="p">,</span>
+        <span class="na">filename</span><span class="p">:</span> <span class="s1">'C:/grafo-client.log'</span><span class="p">,</span>
+        <span class="na">handleExceptions</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">json</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">maxsize</span><span class="p">:</span> <span class="mi">5242880</span><span class="p">,</span> <span class="c1">// 5MB</span>
+        <span class="na">maxFiles</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="na">colorize</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">console</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">level</span><span class="p">:</span> <span class="s1">'debug'</span><span class="p">,</span>
+        <span class="na">handleExceptions</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">json</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">colorize</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">doGrafo</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">Logger</span><span class="p">)({</span>
+              <span class="na">transports</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">)(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">console</span><span class="p">),</span>
+                  <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">file</span><span class="p">)</span>
+              <span class="p">],</span> <span class="na">exceptionHandlers</span><span class="p">:</span> <span class="p">[</span> <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">()</span> <span class="p">]</span>
+          <span class="p">});</span>
+
+        <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"Starting Grafo Client Example"</span><span class="p">);</span>
+
+        <span class="kd">var</span> <span class="nx">grafoClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GrafoClient</span><span class="p">();</span>
+
+        <span class="c1">//Pass the logger variable to grafoclient's init method</span>
+        <span class="c1">//config variable is used for authentication details. Check Authentication section for more information on this.</span>
+        <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">logger</span><span class="p">);</span>
+        <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"Authenticated"</span><span class="p">);</span>
+
+        <span class="c1">//.. write actual grafo client code here</span>
+
+        <span class="nx">await</span> <span class="nx">grafoClient</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">doGrafo</span><span class="p">();</span>
+</code></pre><h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authenticate, use this code:</p>
 </blockquote>
