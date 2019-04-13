@@ -221,6 +221,9 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
+            <a href="#download-grafo-client-starter-pack" class="toc-h1 toc-link" data-title="Download Grafo Client Starter Pack">Download Grafo Client Starter Pack</a>
+          </li>
+          <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
@@ -608,7 +611,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <h1 id='download-grafo-client-starter-pack'>Download Grafo Client Starter Pack</h1>
+<p>The grafo-client tar can be downloaded from following link.
+<p><a href="https://github.com/grafo-client/grafo-client.github.io/raw/master/downloads/grafoclient-starterpack-1.0.0.tar.gz">Grafo Client 1.0.0 Starter Pack tar</a></p></p>
+
+<p>Tar Contents</p>
+
+<ul>
+  <li>Read Me</li>
+  <li>Java Examples</li>
+  <li>Javascript Examples</li>
+</ul>
+<h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Grafo Client API! You can use our API to access Grafo endpoints at https://gra.fo to search, fetch your documents (or documents shared with you), folders, corresponding EKG documents and work on them programmatically to add/update/delete them or their constituent entites.</p>
 
 <p>Apart from raw REST API support, we also have language bindings in Java, and JavaScript! You can view code examples in the area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
@@ -773,12 +787,13 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
 <span class="kd">var</span> <span class="nx">doGrafo</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
-          <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">Logger</span><span class="p">)({</span>
-              <span class="na">transports</span><span class="p">:</span> <span class="p">[</span>
-                  <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">)(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">console</span><span class="p">),</span>
-                  <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">file</span><span class="p">)</span>
-              <span class="p">],</span> <span class="na">exceptionHandlers</span><span class="p">:</span> <span class="p">[</span> <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">()</span> <span class="p">]</span>
-          <span class="p">});</span>
+        <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">createLogger</span><span class="p">({</span>
+            <span class="na">level</span><span class="p">:</span> <span class="s1">'debug'</span><span class="p">,</span>
+            <span class="na">transports</span><span class="p">:</span> <span class="p">[</span>
+                <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">)(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">console</span><span class="p">),</span>
+                <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">logOptions</span><span class="p">.</span><span class="nx">file</span><span class="p">)</span>
+            <span class="p">],</span> <span class="na">exceptionHandlers</span><span class="p">:</span> <span class="p">[</span> <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">()</span> <span class="p">]</span>
+        <span class="p">});</span>
 
         <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"Starting Grafo Client Example"</span><span class="p">);</span>
 
@@ -3449,7 +3464,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
       <span class="c1">//Refer Section on Authentication</span>
 
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
-      <span class="kd">var</span> <span class="nx">conceptList</span> <span class="o">=</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getConcepts</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">conceptList</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getConcepts</span><span class="p">();</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">conceptList</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
@@ -4029,7 +4044,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/concep
       <span class="cm">/*********************
       Parameters: ConceptId
       **********************/</span>
-     <span class="kd">var</span> <span class="nx">attributeList</span> <span class="o">=</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getConceptAttributes</span><span class="p">(</span><span class="s2">"node-5baeadf9-24e0-4776-b2e9-75ef535ef88c"</span><span class="p">);</span>
+     <span class="kd">var</span> <span class="nx">attributeList</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getConceptAttributes</span><span class="p">(</span><span class="s2">"node-5baeadf9-24e0-4776-b2e9-75ef535ef88c"</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">attributeList</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
@@ -4484,7 +4499,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relati
       <span class="c1">//Refer Section on Authentication</span>
 
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
-      <span class="kd">var</span> <span class="nx">relList</span> <span class="o">=</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getRelationships</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">relList</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getRelationships</span><span class="p">();</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">relList</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
@@ -5104,7 +5119,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/relati
       <span class="c1">//Refer Section on Authentication</span>
 
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
-     <span class="kd">var</span> <span class="nx">attributeList</span> <span class="o">=</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getRelationshipAttributes</span><span class="p">(</span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">);</span>
+     <span class="kd">var</span> <span class="nx">attributeList</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getRelationshipAttributes</span><span class="p">(</span><span class="s2">"link-2e2069ba-3523-4731-8c41-35189796f7dd"</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">attributeList</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
@@ -5550,7 +5565,7 @@ curl https://gra.fo/api/v1/documents/536a35f8-cb7b-41c6-a834-c4c03516657a/specia
       <span class="c1">//Refer Section on Authentication</span>
 
       <span class="c1">//Fetch EKG Document. Refer Documentation on EKG Document</span>
-    <span class="kd">var</span> <span class="nx">specializationList</span> <span class="o">=</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getSpecializations</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">specializationList</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">ekgDoc</span><span class="p">.</span><span class="nx">getSpecializations</span><span class="p">();</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">specializationList</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
