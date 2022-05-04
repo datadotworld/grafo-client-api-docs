@@ -3439,7 +3439,7 @@ If outputType is other than ttl or owl, the document is by default exported to t
     <span class="nt">-d</span> <span class="s1">'{
       "title": "Updated Document", 
       "concepts": {
-        "node-926593ff-a5bf-4809-8a47-8b50affba939" :
+        "node-926593ff-a5bf-4809-8a47-8b50affba939" : {
         "id" : "node-926593ff-a5bf-4809-8a47-8b50affba939",
         "entityState":2,
         "fields":[{
@@ -3447,9 +3447,9 @@ If outputType is other than ttl or owl, the document is by default exported to t
           "text":"Value2",
           "entityState":1
         }],
-        "iri":"www.abc.com/schema/ModifiedIritest1"
+        "iri":"www.abc.com/schema/ModifiedIritest1",
         "color":"#d4d4d4"
-      }}'</span> 
+      }}}'</span> 
     https://app.gra.fo/api/v1/documents/446f86c7-2f0f-4fe7-9bea-c778e469b914/ekg
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Not supported</span>
 </code></pre></div>
@@ -4024,7 +4024,7 @@ This API may return a 404 or empty array based on two scenarios:
 </span></code></pre></div>
 <p>This endpoint updates my concept with the specified id.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>PUT https://app.gra.fo/api/v1/documents/&lt;docId&gt;concepts/&lt;ID&gt;</code></p>
+<p><code>PUT https://app.gra.fo/api/v1/documents/&lt;docId&gt;/concepts/&lt;ID&gt;</code></p>
 <h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
